@@ -12,10 +12,10 @@ services:
       - CERTIFICATE=/certificates/appa.cert
       - KEY=/certificates/appa.pem
       - SP_ENTITY_ID=dev:kit:appa     
-      - SAML_LB_SCHEME=http           # Webserver (LB), http or https
-      - SAML_LB_SERVERNAME=localhost  # Webserver (LB), servername
-      - SAML_LB_SERVERPORT=8080       # Webserver (LB), Port 
-      - APP_CONTEXT=appa              # contexten for applikationen (SAML_LB_SCHEME://SAML_LB_SERVERNAME:SAML_LB_SERVERPORT/APP_CONTEXT)
+      - SAML_LB_SCHEME=http           # TODO Webserver (LB), http or https
+      - SAML_LB_SERVERNAME=localhost  # TODO Webserver (LB), servername
+      - SAML_LB_SERVERPORT=8080       # TODO Webserver (LB), Port 
+      - APP_CONTEXT=appa              # TODO contexten for applikationen (SAML_LB_SCHEME://SAML_LB_SERVERNAME:SAML_LB_SERVERPORT/APP_CONTEXT)
       - MONGODB=mongo
       - MONGODB_DATABASE=mongo_appa
    app-a-sp-proxy:
@@ -23,7 +23,7 @@ services:
      ports:
       - "8080:80"
      environment:
-      - ENDPOINT_URL=http://app-a:8080/       # Url på applikation (LoginAdaptor), localhost/127.0.0.1 can NOT be used
+      - ENDPOINT_URL=http://app-a:8080/       # TODO Url på applikation (Login Adaptor), localhost/127.0.0.1 can NOT be used
       - SAML_URL=http://app-a-saml-sp:8080/
       - CONTEXT=appa
       - MONGODB=mongo
