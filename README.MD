@@ -11,13 +11,13 @@ Strukturen for projektet er som følger.
      └ MM
 </pre>
 
-EG, LP og MM refererer til de tre deltagere i projektet EG, Life-partners og Mobilize Me.
+EG, LP og MM refererer til de tre projektdeltagere EG, Life-partners og Mobilize Me.
 
 Hver mappe indeholder en docker-compose file der kan benytte til at starte test setup'et.
 
-Det forudsættes at den enkelte leverandør har [Docker Community Edition (CE)](https://docs.docker.com/engine/installation/) installeret for at køre testsetup'et.
+Det forudsættes at den enkelte leverandør har [Docker Community Edition (CE) (eller tidligere version)](https://docs.docker.com/engine/installation/) installeret.
 
-For at kunne hente komponenterne skal man først logge ind mod KITs docker registry:
+For at hente komponenterne skal der først logges ind mod KITs docker registry:
 ```
 åbn en prompt
 docker login
@@ -31,7 +31,16 @@ docker-compose up
 
 ```
 
+For at kunne benytte dette setup i leverandørens egen kontekst skal der laves enkelte ændringer til docker-compose filen.
+
 ## Opsætning af docker-compose
+Dette afsnit hvilke parametre der kan/skal ændres i docker-compose filen for at benytte eget setup.
+![overview](/images/overview.png)
+
+
 For at kunne benytte testsetup'et som en del af levenrandørens eget setup skal docker-compose filen rettes til.
+
+
+
 
 
