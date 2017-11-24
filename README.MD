@@ -21,12 +21,12 @@ For at hente komponenterne skal der først logges ind mod KITs docker registry:
 ```
 åbn en prompt
 docker login kitdocker.kvalitetsit.dk
-indtast brugernavn og password
+indtast brugernavn og password (fremsendt i mail)
 ```
 Derefter kan følgende setup'et startes op
 
 ```
-cd ~/../KK-SOF-public/SP-testsetup/
+cd ~/../KK-SOF-public/SP-testsetup/EG|LP|MM
 docker-compose up
 
 ```
