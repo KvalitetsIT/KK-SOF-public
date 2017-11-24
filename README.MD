@@ -20,7 +20,7 @@ Det forudsættes at den enkelte leverandør har [Docker Community Edition (CE) (
 For at hente komponenterne skal der først logges ind mod KITs docker registry:
 ```
 åbn en prompt
-docker login
+docker login kitdocker.kvalitetsit.dk
 indtast brugernavn og password
 ```
 Derefter kan følgende setup'et startes op
@@ -46,6 +46,7 @@ Følgende parametre skal rettes for at "SAML 2.0 Service Provider" fungerer samm
 
 ### Webserver
 Nedenstående parametre bestemmer lokationen af webserveren som der redirectes til når brugeren har foretaget login. 
+Hvis nedenstående miljøvariable ikke ændres vil kald på http://localhost:8080/appa kunne bruges som test url (kan være relevant under udvikling).
 
 ```
       - SAML_LB_SCHEME=http           # TODO Webserver (LB), http or https
@@ -63,7 +64,7 @@ Nedenstående skal ændres til at pege på loginadaptoren (eller en usikret appl
 
 Det er loginproxys (defineret via ENDPOINT_URL) opgave at trække data ud fra "SAML 2.0 Service Provider". Nedenstående skitserer dette.
 
-![overview](/images/overview.png)
+![overview](/images/userdata.png)
 
 For at "Login Adaptoren" kan fremsøge data, skal "login adaptoren":
 2. Loginadaptoren skal parse den cookie der sendes med i request’et for at finde attributten SESSION.
