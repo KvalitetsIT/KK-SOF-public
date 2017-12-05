@@ -12,7 +12,7 @@ services:
   mongo:
     image: mongo:3.3
   app-a-saml-sp:
-    image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spapp:9ec8d2fd693c640023ecddaa9344c770302b6c13
+    image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spapp:904a90528ff9095a915d2099e48bb672382a78dd
     volumes:
      - ./config:/certificates
     environment:
@@ -20,21 +20,22 @@ services:
      - IDP_LOGIN_URL=https://kkff.kvalitetsit.dk/venliglogin/saml2/idp/SSOService.php  
      - CERTIFICATE=/certificates/appa.cert
      - KEY=/certificates/appa.pem
-     - SP_ENTITY_ID=dev:kit:appasec
+     - SP_ENTITY_ID=test:eg
      - SAML_LB_SCHEME=https           # TODO Webserver (LB), http or https
-     - SAML_LB_SERVERNAME=demo.careappdev.dk  # TODO Webserver (LB), servername
+     - SAML_LB_SERVERNAME=venliglogin.careappdev.dk  # TODO Webserver (LB), servername
      - SAML_LB_SERVERPORT=443       # TODO Webserver (LB), Port
      - APP_CONTEXT=appa              # TODO contexten for applikationen (SAML_LB_SCHEME://SAML_LB_SERVERNAME:SAML_LB_SERVERPORT/APP_CONTEXT)
      - MONGODB=mongo
      - MONGODB_DATABASE=mongo_appa
   app-a-sp-proxy:
-    image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spproxy:2cc8b2da1105dc1c405a3e349c08a844f8f95ecb
+    image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spproxy:904a90528ff9095a915d2099e48bb672382a78dd
     ports:
      - "8080:80"
     environment:
      - ENDPOINT_URL=https://demo.careappdev.dk/api/auth/venlig_login      # TODO Url på applikation (Login Adaptor), localhost/127.0.0.1 can NOT be used.  
      - SAML_URL=http://app-a-saml-sp:8080/
      - CONTEXT=appa
+     - SET_HOST_SNI=true
      - REMOVE_CONTEXT=true
      - MONGODB=mongo
      - MONGODB_DATABASE=mongo_appa
