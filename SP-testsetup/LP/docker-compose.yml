@@ -3,7 +3,7 @@ services:
    mongo:
      image: mongo:3.3
    app-a-saml-sp:
-     image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spapp:9cba176d3259deffeb9393b8efc20b78dbd215f4
+     image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spapp:904a90528ff9095a915d2099e48bb672382a78dd
      volumes:
       - ./config:/certificates 
      environment:
@@ -19,14 +19,15 @@ services:
       - MONGODB=mongo
       - MONGODB_DATABASE=mongo_appa
    app-a-sp-proxy:
-     image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spproxy:9cba176d3259deffeb9393b8efc20b78dbd215f4
+     image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spproxy:904a90528ff9095a915d2099e48bb672382a78dd
      ports:
       - "8080:80"
      environment:
-      - ENDPOINT_URL=http://loginadaptor:9876/       # TODO Url på applikation (Login Adaptor), localhost/127.0.0.1 can NOT be used.  
+      - ENDPOINT_URL=http//loginadaptor:9876/       # TODO Url på applikation (Login Adaptor) kan være http eller https, localhost/127.0.0.1 can NOT be used.  
       - SAML_URL=http://app-a-saml-sp:8080/
       - CONTEXT=appa
       - REMOVE_CONTEXT=true
+      - SET_HOST_SNI=true
       - MONGODB=mongo
       - MONGODB_DATABASE=mongo_appa
       - CORRELATION_ID=correlation-id
