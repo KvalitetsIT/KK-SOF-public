@@ -1,0 +1,38 @@
+version: '2'
+services:
+  mongodb:
+    image: mongo:3.3
+  stsclient:
+    image: kitdocker.kvalitetsit.dk/kit-serviceproxy/sts-client:1c346ee0f35af3539eae14d03605ecb227e94fd5
+    environment:
+     - JVM_OPTS=-Djavax.net.ssl.trustStore=/app/lib/trust.jks -Djavax.net.ssl.trustStorePassword=Test1234
+     - SERVER_PORT=7001
+     - STS_TRUST_CERTIFICATE=/sts/sts.crt
+     - STS_CLIENT_CERTIFICATE=/certificate/client.cer
+     - STS_CLIENT_KEY=/certificate/client.pem
+     - STS_WSDL_URL=https://sts.kkff-api.kvalitetsit.dk/sts/sts.wsdl
+     - LOG_LEVEL=DEBUG
+     - HOSTNAME_VERIFICATION=false
+    volumes:
+      - ./clientcertificates:/certificate
+      - ./stscertificates:/sts
+  serviceconsumer:
+    image: kitdocker.kvalitetsit.dk/kit-serviceproxy/oioidws-rest-wsc:1c346ee0f35af3539eae14d03605ecb227e94fd5
+    links:
+     - stsclient
+     - mongodb
+    volumes:
+      - ./clientcertificates:/certificates
+    environment:
+     - SERVER_PORT=80
+     - MONGODB_HOST=mongodb
+     - MONGODB_DATABASE=eksmongo
+     - STS_CLIENT_TOKEN_REQUEST_URL=http://stsclient:7001/requestToken
+     - CLIENT_CERTIFICATE=client.cer
+     - CLIENT_KEY=client.pem
+     - AUDIENCE=urn:kkff:fhirservice
+     - ENDPOINT_URL=https://fhirservice.kkff-api.kvalitetsit.dk/fhirservice
+     - CORRELATION_ID=correlation-id
+    ports:
+     - "9090:80"
+
