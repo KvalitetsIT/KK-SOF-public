@@ -3,7 +3,7 @@ services:
   mongodb:
     image: mongo:3.3
   stsclient:
-    image: kitdocker.kvalitetsit.dk/kit-serviceproxy/sts-client:1c346ee0f35af3539eae14d03605ecb227e94fd5
+    image: kitdocker.kvalitetsit.dk/kit-serviceproxy/sts-client:2455f0aeaa9bdf1d1730906f5851c9328b33f0c9
     environment:
      - JVM_OPTS=-Djavax.net.ssl.trustStore=/app/lib/trust.jks -Djavax.net.ssl.trustStorePassword=Test1234
      - SERVER_PORT=7001
@@ -11,13 +11,13 @@ services:
      - STS_CLIENT_CERTIFICATE=/certificate/client.cer
      - STS_CLIENT_KEY=/certificate/client.pem
      - STS_WSDL_URL=https://sts.kkff-api.kvalitetsit.dk/sts/sts.wsdl
-     - LOG_LEVEL=DEBUG
+     - LOG_LEVEL=INFO
      - HOSTNAME_VERIFICATION=false
     volumes:
       - ./clientcertificates:/certificate
       - ./stscertificates:/sts
   serviceconsumer:
-    image: kitdocker.kvalitetsit.dk/kit-serviceproxy/oioidws-rest-wsc:1c346ee0f35af3539eae14d03605ecb227e94fd5
+    image: kitdocker.kvalitetsit.dk/kit-serviceproxy/oioidws-rest-wsc:2455f0aeaa9bdf1d1730906f5851c9328b33f0c9
     links:
      - stsclient
      - mongodb
