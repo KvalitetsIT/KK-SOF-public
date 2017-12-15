@@ -97,6 +97,8 @@ Docker-compose'n består af tre images:
 
 Når docker-compose er startet op, vil man kunne kalde wsc´en på localhost:9090 (denne port kan konfigureres ved port-mapningen på sidste linje), hvorefter den vil trække et sikkerheds-token fra vores STS (konfigureret ved STS_WSDL_URL), og herefter foretage et sikret kald videre til https://fhirservice.kkff-api.kvalitetsit.dk/fhirservice/ (konfigureret ved ENDPOINT_URL).
 
+I en drift-situation, bør wsc´en deployes på det kaldende systems servermiljø således at kun det kaldende system´s serverkode kan komme til at kalde wsc´en.
+
 docker-compose setuppet indeholder også en mongo-database, som cacher de sikkerheds-tokens som der trækkes fra STS. Man bør derfor (i alle REST-kald igennem wsc) angive en http-header SESSION indeholdende et sessions-id - da det er på dette sessions-id at det cachede sikkerheds-token vil blive knyttet op.
 
 For at skifte hvilket endpoint man kører op imod skal ENDPOINT_URL udskiftes
