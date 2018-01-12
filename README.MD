@@ -1,9 +1,13 @@
 # KK-SOF-public
-Dette projekt indeholder et testsetup, der kan benyttes til login mod de IdP der er sat op til Københavns Kommune (SOF).
+Dette projekt indeholder to testsetups:
+
+- Et, der kan benyttes til login mod de IdP der er sat op til Københavns Kommune (SOF).
+- Et, der kan foretages til at foretage sikrede REST-kald til de fhir-services der er sat op til Københavns Kommune (SOF).
 
 Strukturen for projektet er som følger.
 <pre>
  ┬  
+ ├ fhirservice_client
  └ SP-testsetup  
      ┬  
      ├ EG   
@@ -31,9 +35,18 @@ docker-compose up
 
 ```
 
-For at benytte setup'et i leverandørens egen kontekst skal der laves enkelte ændringer til docker-compose filen.
+Eller
 
-## Opsætning af docker-compose
+
+```
+cd ~/../KK-SOF-public/fhirservice_client/
+docker-compose up
+
+```
+
+For at benytte "SP-testsetup" i leverandørens egen kontekst skal der laves enkelte ændringer til docker-compose filen.
+
+## Opsætning af docker-compose (SP-testsetup)
 Dette afsnit hvilke parametre der kan/skal ændres i docker-compose filen for at benytte det eget setup.
 
 Vedlagte docker-compose fil starter de komponenter som udgør "SAML 2.0 Service Provider". "SAML 2.0 Service Provider"'s opgave er at snakke med IdP'en. Metadata er udvekslet. 
@@ -74,7 +87,27 @@ For at "Login Adaptoren" kan fremsøge data, skal "login adaptoren":
 
 ![json](/images/json.png)
 
+## Brug af docker-compose (fhirservice_client)
 
+Docker-compose'n består af tre images:
+
+- Webservice comsumer (wsc) - som alle kald foretages igennem
+- Mongo - letvægts-database som cacher tokens trukket fra STS
+- Stsclient - hjælpe-komponent til at trække tokens fra STS (Secure Token Service)
+
+Når docker-compose er startet op, vil man kunne kalde wsc´en på localhost:9090 (denne port kan konfigureres ved port-mapningen på sidste linje), hvorefter den vil trække et sikkerheds-token fra vores STS (konfigureret ved STS_WSDL_URL), og herefter foretage et sikret kald videre til https://fhirservice.kkff-api.kvalitetsit.dk/fhirservice/ (konfigureret ved ENDPOINT_URL).
+
+I en drift-situation, bør wsc´en deployes på det kaldende systems servermiljø således at kun det kaldende system´s serverkode kan komme til at kalde wsc´en.
+
+docker-compose setuppet indeholder også en mongo-database, som cacher de sikkerheds-tokens som der trækkes fra STS. Man bør derfor (i alle REST-kald igennem wsc) angive en http-header SESSION indeholdende et sessions-id - da det er på dette sessions-id at det cachede sikkerheds-token vil blive knyttet op.
+
+For at skifte hvilket endpoint man kører op imod skal ENDPOINT_URL udskiftes
+
+For at skifte hvilken STS man kører op imod:
+
+- STS_WSDL_URL skal ændres
+- STS´ens certifikat placeres i volume og refereres til med STS_TRUST_CERTIFICATE
+- Det certifikat og den privatnøgle som man identificerer sig med overfor STS skal placeres i volume og refereres til med STS_CLIENT_CERTIFICATE og STS_CLIENT_KEY
 
 
 
