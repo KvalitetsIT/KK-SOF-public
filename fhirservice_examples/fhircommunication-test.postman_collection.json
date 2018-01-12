@@ -1,0 +1,462 @@
+{
+	"variables": [],
+	"info": {
+		"name": "fhircommunication-test",
+		"_postman_id": "c1bb794c-710b-c3cd-db2b-835ed4c20fcb",
+		"description": "Samling af kald til test af fhircommunication-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:9090/createCommunication",
+			"request": {
+				"url": "localhost:9090/createCommunication",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "SESSION",
+						"value": "12345678",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"communication\":{\n      \"resourceType\":\"Communication\",\n      \"identifier\":[\n         {\n            \"system\":\"DIGILUX\",\n            \"value\":\"28383883\"\n         }\n      ],\n      \"recipient\":[\n         {\n            \"reference\":\"Patient/0102039002\",\n            \"display\":\"Ole Poulsen\"\n         },\n         {\n            \"reference\":\"Practitioner/gj43\",\n            \"display\":\"Pia Rulin\"\n         },\n         {\n            \"reference\":\"RelatedPerson/0102039003\",\n            \"display\":\"Ove Rasmus Holm\"\n         }\n      ],\n      \"sent\":\"2017-10-05T10:32:20+02:00\",\n      \"sender\":{\n         \"reference\":\"Patient/0102039001\",\n         \"display\":\"Ruth Nebel\"\n      },\n      \"payload\":[\n         {\n            \"contentString\":\"Ny cykel\"\n         },\n         {\n            \"contentString\":\"Jeg har fået en ny cykel, her er et billede af den\"\n         },\n         {\n            \"contentAttachment\":{\n               \"contentType\":\"image/jpeg\",\n               \"url\":\"http://www.eksterntsystem.dk/resourcer/49949/cykel.jpg\",\n               \"title\":\"Billede af cykel\"\n            }\n         }\n      ]\n   }\n}"
+				},
+				"description": "Opretter et communication object"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/getCommunicationsSentFrom?id=0102039001&personType=PATIENT&fromDate=2017-10-05",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/fcs/getCommunicationsSentFrom?id=0102039001&personType=PATIENT&fromDate=2017-10-05",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fcs",
+						"getCommunicationsSentFrom"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0102039001",
+							"equals": true
+						},
+						{
+							"key": "personType",
+							"value": "PATIENT",
+							"equals": true
+						},
+						{
+							"key": "fromDate",
+							"value": "2017-10-05",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Henter communication objecter sendt fra  en patient (personType=PATIENT) med id=0102039001 (CPR) og som er oprettet efter 2017-10-05 (inkl.)"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/getCommunicationsSentFrom?id=0102039001&personType=PATIENT&toDate=2017-10-07",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/fcs/getCommunicationsSentFrom?id=0102039001&personType=PATIENT&toDate=2017-10-07",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fcs",
+						"getCommunicationsSentFrom"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0102039001",
+							"equals": true
+						},
+						{
+							"key": "personType",
+							"value": "PATIENT",
+							"equals": true
+						},
+						{
+							"key": "toDate",
+							"value": "2017-10-07",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Henter communication objecter sendt fra  en patient (personType=PATIENT) med id=0102039001 (CPR) og som er oprettet t.o.m. 2017-10-07"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/getCommunicationsSentFrom?id=0102039001&personType=PATIENT&fromDate=2017-10-05&toDate=2017-10-07",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/fcs/getCommunicationsSentFrom?id=0102039001&personType=PATIENT&fromDate=2017-10-05&toDate=2017-10-07",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fcs",
+						"getCommunicationsSentFrom"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0102039001",
+							"equals": true
+						},
+						{
+							"key": "personType",
+							"value": "PATIENT",
+							"equals": true
+						},
+						{
+							"key": "fromDate",
+							"value": "2017-10-05",
+							"equals": true
+						},
+						{
+							"key": "toDate",
+							"value": "2017-10-07",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Henter communication objecter sendt fra  en patient (personType=PATIENT) med id=0102039001 (CPR) og som er oprettet i tidsrummet 2017-10-05 - 2017-10-07, begge dage inkl."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/getCommunicationsSentTo?id=0102039002&personType=PATIENT&fromDate=2017-10-05",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/fcs/getCommunicationsSentTo?id=0102039002&personType=PATIENT&fromDate=2017-10-05",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fcs",
+						"getCommunicationsSentTo"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0102039002",
+							"equals": true
+						},
+						{
+							"key": "personType",
+							"value": "PATIENT",
+							"equals": true
+						},
+						{
+							"key": "fromDate",
+							"value": "2017-10-05",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Henter communication objecter sendt til en patient (personType=PATIENT) med id=0102039002 (CPR) og som er oprettet efter 2017-10-05 (inkl.)"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/getCommunicationsSentTo?id=0102039002&personType=PATIENT&toDate=2017-10-07",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/fcs/getCommunicationsSentTo?id=0102039002&personType=PATIENT&toDate=2017-10-07",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fcs",
+						"getCommunicationsSentTo"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0102039002",
+							"equals": true
+						},
+						{
+							"key": "personType",
+							"value": "PATIENT",
+							"equals": true
+						},
+						{
+							"key": "toDate",
+							"value": "2017-10-07",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Henter communication objecter sendt til en patient (personType=PATIENT) med id=0102039002 (CPR) og som er oprettet t.o.m. 2017-10-07"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/getCommunicationsSentTo?id=0102039002&personType=PATIENT&fromDate=2017-10-05&toDate=2017-10-07 copy copy",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/fcs/getCommunicationsSentTo?id=0102039002&personType=PATIENT&fromDate=2017-10-05&toDate=2017-10-07",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fcs",
+						"getCommunicationsSentTo"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0102039002",
+							"equals": true
+						},
+						{
+							"key": "personType",
+							"value": "PATIENT",
+							"equals": true
+						},
+						{
+							"key": "fromDate",
+							"value": "2017-10-05",
+							"equals": true
+						},
+						{
+							"key": "toDate",
+							"value": "2017-10-07",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Henter communication objecter sendt til en patient (personType=PATIENT) med id=0102039002 (CPR) og som er oprettet i tidsrummet 2017-10-05 - 2017-10-07, begge dage inkl."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/createAppointment",
+			"request": {
+				"url": "localhost:8080/fcs/createAppointment",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"appointment\":{\n      \"resourceType\":\"Appointment\",\n      \"identifier\":[\n         {\n            \"system\":\"JOUR-SCAN\",\n            \"value\":\"1572\"\n         }\n      ],\n      \"status\":\"booked\",\n      \"serviceCategory\":{\n         \"coding\":[\n            {\n               \"system\":\"JOUR-SCAN\",\n               \"code\":\"CLEAN\",\n               \"display\":\"Rengøring\"\n            }\n         ]\n      },\n      \"appointmentType\":{\n         \"coding\":[\n            {\n               \"system\":\"JOUR-SCAN\",\n               \"code\":\"TASK\",\n               \"display\":\"Opgave\"\n            }\n         ]\n      },\n      \"description\":\"Møde om blodprøve\",\n      \"start\":\"2017-10-05T12:00:00.000+02:00\",\n      \"end\":\"2017-10-06T13:00:00.000+02:00\",\n      \"participant\":[\n         {\n            \"actor\":{\n               \"reference\":\"Patient/0102039002\",\n               \"display\":\"Ole Poulsen\"\n            },\n            \"status\":\"accepted\"\n         },\n         {\n            \"actor\":{\n               \"reference\":\"Practitioner/gj43\",\n               \"display\":\"Pia Rulin\"\n            },\n            \"status\":\"tentative\"\n         },\n         {\n            \"actor\":{\n               \"reference\":\"RelatedPerson/0102039003\",\n               \"display\":\"Ove Rasmus Holm\"\n            },\n            \"status\":\"declined\"\n         }\n      ]\n   }\n}"
+				},
+				"description": "Opretter et appointment object"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/updateAppointment",
+			"request": {
+				"url": "localhost:8080/fcs/updateAppointment",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"appointment\":{\n      \"resourceType\":\"Appointment\",\n      \"id\": \"6\",\n      \"meta\":{\n         \"versionId\":\"1\",\n         \"lastUpdated\":\"2017-12-12T12:21:50.000+00:00\"\n      },\n      \"identifier\":[\n         {\n            \"system\":\"JOUR-SCAN\",\n            \"value\":\"1572\"\n         }\n      ],\n      \"status\":\"booked\",\n      \"serviceCategory\":{\n         \"coding\":[\n            {\n               \"system\":\"JOUR-SCAN\",\n               \"code\":\"CLEAN\",\n               \"display\":\"Rengøring\"\n            }\n         ]\n      },\n      \"appointmentType\":{\n         \"coding\":[\n            {\n               \"system\":\"JOUR-SCAN\",\n               \"code\":\"TASK\",\n               \"display\":\"Opgave\"\n            }\n         ]\n      },\n      \"description\":\"Møde om blodprøve\",\n      \"start\":\"2017-10-05T12:00:00.000+02:00\",\n      \"end\":\"2017-10-06T13:00:00.000+02:00\",\n      \"participant\":[\n         {\n            \"actor\":{\n               \"reference\":\"Patient/0102039002\",\n               \"display\":\"Ole Poulsen\"\n            },\n            \"status\": \"accepted\"\n         },\n         {\n            \"actor\":{\n               \"reference\":\"Practitioner/gj43\",\n               \"display\":\"Pia Rulin\"\n            },\n            \"status\": \"accepted\"\n         },\n         {\n            \"actor\":{\n               \"reference\":\"RelatedPerson/0102039003\",\n               \"display\":\"Ove Rasmus Holm\"\n            },\n            \"status\": \"declined\"\n         }\n      ]\n   }\n}"
+				},
+				"description": "Opdaterer et allerede oprettet appointment object"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/getAppointments?id=0102039002&personType=PATIENT&fromDate=2017-10-05",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/fcs/getAppointments?id=0102039002&personType=PATIENT",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fcs",
+						"getAppointments"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0102039002",
+							"equals": true
+						},
+						{
+							"key": "personType",
+							"value": "PATIENT",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Henter appointment objecter for en patient (personType=PATIENT) med id=0102039002 (CPR)"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/getAppointments?id=0102039002&personType=PATIENT&toDate=2017-10-07",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/fcs/getAppointments?id=0102039002&personType=PATIENT&toDate=2017-10-07",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fcs",
+						"getAppointments"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0102039002",
+							"equals": true
+						},
+						{
+							"key": "personType",
+							"value": "PATIENT",
+							"equals": true
+						},
+						{
+							"key": "toDate",
+							"value": "2017-10-07",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Henter appointment objecter for en patient (personType=PATIENT) med id=0102039002 (CPR) og som er oprettet t.o.m. 2017-10-07"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/getAppointments?id=0102039002&personType=PATIENT&fromDate=2017-10-05&toDate=2017-10-07",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/fcs/getAppointments?id=0102039002&personType=PATIENT&fromDate=2017-10-05&toDate=2017-10-07",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fcs",
+						"getAppointments"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0102039002",
+							"equals": true
+						},
+						{
+							"key": "personType",
+							"value": "PATIENT",
+							"equals": true
+						},
+						{
+							"key": "fromDate",
+							"value": "2017-10-05",
+							"equals": true
+						},
+						{
+							"key": "toDate",
+							"value": "2017-10-07",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Kald til getAppointments der henter appointment objecter for en patient (personType=PATIENT) med id=0102039002 (CPR) og som er oprettet i tidsrummet 2017-10-05 - 2017-10-07, begge dage inkl."
+			},
+			"response": []
+		}
+	]
+}
