@@ -89,7 +89,7 @@ For at "Login Adaptoren" kan fremsøge data, skal "login adaptoren":
 
 ### Flytning mellem leverandørens miljøer
 Hvis leverandøren vil have loginflowet til at køre på andet end localhost (eksempelvis på en testserver), skal følgende gøres:
-- Flytte docker-compose setup over på jeres testserver
+- Flytte docker-compose setup over på testserveren
 - Ændre "SP_ENTITY_ID" til noget andet f.eks. SP_ENTITY_ID=test:mm:voresapp
 - Ændre SAML_LB_SERVERNAME til f.eks. test.xx.dk (Ved at ændre properties, kan der kan også køres https og trafikken kan flyttes til en anden port).
 - Skriv til KIT vedrørende URL til metadata. Det kan være "http://test.xx.dk:8080/appa/saml/metadata" (metadata bliver automatisk udstillet ved opstart af dockercompose filen). 
