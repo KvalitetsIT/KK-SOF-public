@@ -1,8 +1,8 @@
 # KK-SOF-public
 Dette projekt indeholder to testsetups:
 
-- Et, der kan benyttes til login mod de IdP der er sat op til Københavns Kommune (SOF).
-- Et, der kan foretages til at foretage sikrede REST-kald til de fhir-services der er sat op til Københavns Kommune (SOF).
+- Et, der kan benyttes til login mod de IdP'er der er sat op til Københavns Kommune (SOF).
+- Et, der kan sikrede REST-kald til de fhir-services, der er sat op til Københavns Kommune (SOF).
 
 Strukturen for projektet er som følger.
 <pre>
