@@ -10,7 +10,7 @@ services:
      - STS_TRUST_CERTIFICATE=/sts/sts.crt
      - STS_CLIENT_CERTIFICATE=/certificate/client.cer
      - STS_CLIENT_KEY=/certificate/client.pem
-     - STS_WSDL_URL=https://sts.kkff-api.kvalitetsit.dk/sts/sts.wsdl
+     - STS_WSDL_URL=https://sts.api-telesof.kk.dk/sts/sts.wsdl
      - LOG_LEVEL=INFO
      - HOSTNAME_VERIFICATION=false
     volumes:
@@ -31,7 +31,7 @@ services:
      - CLIENT_CERTIFICATE=client.cer
      - CLIENT_KEY=client.pem
      - AUDIENCE=urn:kkff:fhirservice
-     - ENDPOINT_URL=https://fhirservice.kkff-api.kvalitetsit.dk/fhirservice
+     - ENDPOINT_URL=https://fhirservice.api-telesof.kk.dk/fhirservice
      - CORRELATION_ID=correlation-id
     ports:
      - "9090:80"
