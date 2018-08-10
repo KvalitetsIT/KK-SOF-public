@@ -3,7 +3,7 @@ services:
    mongo:
      image: mongo:3.3
    app-a-saml-sp:
-     image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spapp:9cba176d3259deffeb9393b8efc20b78dbd215f4
+     image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spapp:5974f20e2058f4831a4f6e331515c1dcb43e3815
      volumes:
       - ./config:/certificates 
      environment:
@@ -19,7 +19,7 @@ services:
       - MONGODB=mongo
       - MONGODB_DATABASE=mongo_appa
    app-a-sp-proxy:
-     image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spproxy:9cba176d3259deffeb9393b8efc20b78dbd215f4
+     image: kitdocker.kvalitetsit.dk/kvalitetsit/serviceprovider-spproxy:5974f20e2058f4831a4f6e331515c1dcb43e3815
      ports:
       - "8080:80"
      environment:
