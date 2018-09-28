@@ -8,7 +8,7 @@ services:
       - ./config:/certificates 
      environment:
       - IDP_METADATA_URL=https://medalogin.telesof.kk.dk/auth/realms/medarbejder/protocol/saml/descriptor
-      - IDP_LOGIN_URL=https://medalogin.{{ff_hostname}}/auth/realms/medarbejder/protocol/saml
+      - IDP_LOGIN_URL=https://medalogin.telesof.kk.dk/auth/realms/medarbejder/protocol/saml
       - IDP_METADATA_URL_WGET_OPTIONS=--no-check-certificate
       - CERTIFICATE=/certificates/appa.cert
       - KEY=/certificates/appa.pem
